@@ -1,13 +1,18 @@
 <script setup>
-console.log(111)
+import PanelCenter from './PanelCenter.vue'
+import PanelLeft from './PanelLeft.vue'
 </script>
 
 <template>
   <div class="canvas-wrapper">
     <div class="header">header</div>
     <div class="main">
-      <div class="left">left</div>
-      <div class="right">right</div>
+      <div class="left">
+        <PanelLeft />
+      </div>
+      <div class="content">
+        <PanelCenter />
+      </div>
     </div>
   </div>
 </template>
@@ -30,9 +35,13 @@ console.log(111)
         border-right: 1px solid #ddd;
       }
 
-      .right {
+      .content {
         flex: 1;
       }
+    }
+
+    .canvas {
+      min-height: calc(100vh - $head_height);
     }
   }
 </style>
