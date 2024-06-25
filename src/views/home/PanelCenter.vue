@@ -5,18 +5,15 @@ import {cloneDeep} from 'lodash'
 import ErgRenderer from '@/lib/canvas-render'
 import {data as mockData} from '@/js/mock/theme'
 
-import {drawState} from '@/js/state/draw'
+import {drawState, Erg, loadCanvas} from '@/js/state/draw'
 
 // const {updateLineStatus, } = toRefs(drawState)
-
-const Erg = new ErgRenderer()
 /**
  * 根据主题获取数据
  * 实体数据
  * 实体关系
  * 绘图数据
  * */
-let canvasData = ref(null)
 onMounted(() => {
   initData()
 })
@@ -94,8 +91,8 @@ function initData() {
   initNodeData()
 
   drawState.drawData = lineData
-  drawState.drawData = data.entityInfos || []
-  canvasData.value = cloneDeep(lineData)
+  drawState.entityList = data.entityInfos || []
+  drawState.canvasData = cloneDeep(lineData)
 
   // this.themeId = data.id
   // 更新绘图区id
@@ -108,27 +105,7 @@ function initData() {
   // drawState.entityUpdateData++
   loadCanvas()
 }
-function loadCanvas() {
-  Erg.load({
-    id: 'canvas',
-    data: canvasData.value,
-    fontFamily: '-apple-system, Noto Sans, Helvetica Neue, Helvetica, Nimbus Sans L, Arial, Liberation Sans, PingFang SC, Hiragino Sans GB, Noto Sans CJK SC, Source Han Sans SC, Source Han Sans CN, Microsoft YaHei, Wenquanyi Micro Hei, WenQuanYi Zen Hei, ST Heiti, SimHei, WenQuanYi Zen Hei Sharp, sans-serif',
-    externalFn: {
-      // addNode: this.addNodeSure,
-      // delNode: this.delNode,
-      // dbEntity: this.dbEntity,
-      // addLine: this.addLineSure,
-      // delLine: this.delLine,
-      // dbLine: this.dbLine,
-      // addMark: this.addMarkSure,
-      // delMark: this.delMark,
-      // addNote: this.addNoteDialog,
-      // delNote: this.delNote,
-      // dbNote: this.dbNote,
-      // $message: this.$message,
-    },
-  })
-}
+
 </script>
 <template>
 <div>

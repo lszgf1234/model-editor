@@ -4,6 +4,9 @@ import {
 } from '@element-plus/icons-vue'
 
 import EjIcon from '@/components/ej-icon'
+import {nanoid} from 'nanoid'
+
+import {Erg, addNode} from '@/js/state/draw'
 /**
  * 头部-实体
  *  左侧项目标题
@@ -68,10 +71,8 @@ const tools = [
   },
 ]
 
-// 线 主键 primary key
-function addNode () {
 
-}
+
 </script>
 <template>
   <div class="header-wrapper">
@@ -95,7 +96,7 @@ function addNode () {
         content="新增实体"
         placement="bottom"
       >
-        <EjIcon icon="table-add"/>
+        <EjIcon @click="addNode" icon="table-add"/>
       </el-tooltip>
       <el-tooltip
         effect="dark"
