@@ -3,7 +3,6 @@ import ErgRenderer from '@/lib/canvas-render'
 import {nanoid} from "nanoid";
 import {cloneDeep} from 'lodash'
 
-import enumerate from '@/js/enum'
 export const drawState = reactive({
   // 缩放值
   scale: 100,
@@ -72,9 +71,8 @@ export async function updateData () {
 }
 /**
  * 创建主键*/
-export function addLine () {
-  debugger
-  Erg.value.addLine(enumerate.lineTypes.primaryKey.value)
+export function addLine (type) {
+    Erg.value.addLine(type)
 }
 /**
  * 确认创建主键*/

@@ -6,6 +6,7 @@ import {
 import EjIcon from '@/components/ej-icon'
 
 import {addNode, addLine} from '@/js/state/draw'
+import enumerate from '@/js/enum'
 /**
  * 头部-实体
  *  左侧项目标题
@@ -68,14 +69,14 @@ import {addNode, addLine} from '@/js/state/draw'
         content="创建主键(一对一关系)"
         placement="bottom"
       >
-        <EjIcon icon="primary"  @click="addLine" />
+        <EjIcon icon="primary"  @click="addLine(enumerate.lineTypes.primaryKey.value)" />
       </el-tooltip>
       <el-tooltip
         effect="dark"
         content="新增非主键"
         placement="bottom"
       >
-        <EjIcon icon="non-primary"/>
+        <EjIcon icon="non-primary" @click="addLine(enumerate.lineTypes.foreignKey.value)"/>
       </el-tooltip>
     </el-space>
   </div>
