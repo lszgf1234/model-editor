@@ -1,11 +1,10 @@
 
 <script setup>
-import {onMounted, nextTick, ref} from 'vue'
+import {onMounted, nextTick} from 'vue'
 import {cloneDeep} from 'lodash'
-import ErgRenderer from '@/lib/canvas-render'
 import {data as mockData} from '@/js/mock/theme'
 
-import {drawState, Erg, loadCanvas} from '@/js/state/draw'
+import {drawState, canvasDataRef, loadCanvas} from '@/js/state/draw'
 
 // const {updateLineStatus, } = toRefs(drawState)
 /**
@@ -92,7 +91,8 @@ function initData() {
 
   drawState.drawData = lineData
   drawState.entityList = data.entityInfos || []
-  drawState.canvasData = cloneDeep(lineData)
+  canvasDataRef.value = cloneDeep(lineData)
+
 
   // this.themeId = data.id
   // 更新绘图区id

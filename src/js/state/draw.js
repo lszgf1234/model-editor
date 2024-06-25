@@ -1,7 +1,7 @@
-import {reactive, ref, nextTick} from 'vue'
+import {reactive, ref, nextTick, watch} from 'vue'
 import ErgRenderer from '@/lib/canvas-render'
 import {nanoid} from "nanoid";
-import {cloneDeep} from 'lodash'
+import {cloneDeep, debounce} from 'lodash'
 
 export const drawState = reactive({
   // 缩放值
@@ -10,18 +10,37 @@ export const drawState = reactive({
   drawData: {},
   // 实体数据
   entityList: [],
-  canvasData: [],
+  canvasData: {},
   updateLineStatus: 0,
   // 更新绘图区使用的data$
   updateUseDrawDataStatus: 0,
   graphicsId: '',
 })
 
+export const canvasDataRef = ref({})
+
+/**
+ * 监听画板数据变更，更新数据源
+ *  这里有有性能损耗，从数据源到 画板数据更新，会二次触发此方法，需要一个状态来管理
+ *  */
+/*const updateStatus = ref(false)
+const updateDataSource = debounce(function () {
+  if (updateStatus.value) return
+  console.warn('---------更新，-------')
+  // drawState.drawData = drawState.canvasData
+}, 100)
+watch(canvasDataRef , function () {
+  console.warn('---------更新，-------')
+  // updateDataSource()
+}, {
+  deep: true
+})*/
+
 export const Erg = ref(new ErgRenderer())
 export function loadCanvas() {
   Erg.value.load({
     id: 'canvas',
-    data: drawState.canvasData,
+    data: drawState.drawData,
     fontFamily: '-apple-system, Noto Sans, Helvetica Neue, Helvetica, Nimbus Sans L, Arial, Liberation Sans, PingFang SC, Hiragino Sans GB, Noto Sans CJK SC, Source Han Sans SC, Source Han Sans CN, Microsoft YaHei, Wenquanyi Micro Hei, WenQuanYi Zen Hei, ST Heiti, SimHei, WenQuanYi Zen Hei Sharp, sans-serif',
     externalFn: {
       addNode: addNodeSure,
@@ -65,8 +84,8 @@ export function addNodeSure (drawItem) {
  * 通知画板更新
  * */
 export async function updateData () {
-  await nextTick()
-  drawState.canvasData = cloneDeep(drawState.drawData)
+  // await nextTick()
+  // canvasDataRef.value = cloneDeep(drawState.drawData)
   Erg.value.update(drawState.drawData)
 }
 /**
