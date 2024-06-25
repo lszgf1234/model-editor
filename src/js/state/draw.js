@@ -2,6 +2,8 @@ import {reactive, ref, nextTick} from 'vue'
 import ErgRenderer from '@/lib/canvas-render'
 import {nanoid} from "nanoid";
 import {cloneDeep} from 'lodash'
+
+import enumerate from '@/js/enum'
 export const drawState = reactive({
   // 缩放值
   scale: 100,
@@ -15,6 +17,7 @@ export const drawState = reactive({
   updateUseDrawDataStatus: 0,
   graphicsId: '',
 })
+
 export const Erg = ref(new ErgRenderer())
 export function loadCanvas() {
   Erg.value.load({
@@ -25,7 +28,7 @@ export function loadCanvas() {
       addNode: addNodeSure,
       // delNode: this.delNode,
       // dbEntity: this.dbEntity,
-      // addLine: this.addLineSure,
+      addLine: addLineSure,
       // delLine: this.delLine,
       // dbLine: this.dbLine,
       // addMark: this.addMarkSure,
@@ -37,11 +40,7 @@ export function loadCanvas() {
     },
   })
 }
-/** 新增实体
- * 生成实体信息基本信息
- * 通知画布
- *
- * */
+
 /** 通知画布创建实体*/
 export function addNode () {
   let str = nanoid(5)
@@ -54,6 +53,8 @@ export function addNode () {
   }
   Erg.value.addNode(nodeData)
 }
+/**
+ * 确认新增实体*/
 export function addNodeSure (drawItem) {
   drawState.drawData.nodeDataArray.push(drawItem)
   updateData()
@@ -69,4 +70,21 @@ export async function updateData () {
   drawState.canvasData = cloneDeep(drawState.drawData)
   Erg.value.update(drawState.drawData)
 }
+/**
+ * 创建主键*/
+export function addLine () {
+  debugger
+  Erg.value.addLine(enumerate.lineTypes.primaryKey.value)
+}
+/**
+ * 确认创建主键*/
 
+export function addLineSure (lineData) {
+  drawState.drawData.linkDataArray.push(lineData)
+  updateData()
+  /* 新增线的逻辑
+    组合线数据
+    提交表关系，提交线
+    初始化数据
+  * */
+}

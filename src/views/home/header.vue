@@ -4,9 +4,8 @@ import {
 } from '@element-plus/icons-vue'
 
 import EjIcon from '@/components/ej-icon'
-import {nanoid} from 'nanoid'
 
-import {Erg, addNode} from '@/js/state/draw'
+import {addNode, addLine} from '@/js/state/draw'
 /**
  * 头部-实体
  *  左侧项目标题
@@ -51,46 +50,12 @@ import {Erg, addNode} from '@/js/state/draw'
  *
  * */
 
-const tools = [
-  {
-    icon: DocumentAdd,
-    title: '新增实体',
-    fn: addNode,
-  },
-  {
-    icon: DocumentAdd,
-    title: '新增主键关系',
-    fn: () => {
-    },
-  },
-  {
-    icon: DocumentAdd,
-    title: '新增非主键关系',
-    fn: () => {
-    },
-  },
-]
-
 
 
 </script>
 <template>
   <div class="header-wrapper">
     <el-space class="tools">
-      <!--      <div
-              v-for="(it, idx) of tools"
-              :key="idx"
-            >
-              <el-tooltip
-                effect="dark"
-                :content="it.title"
-                placement="bottom"
-              >
-                <el-icon @click="it.fn">
-                  <component :is="it.icon"/>
-                </el-icon>
-              </el-tooltip>
-            </div>-->
       <el-tooltip
         effect="dark"
         content="新增实体"
@@ -100,10 +65,10 @@ const tools = [
       </el-tooltip>
       <el-tooltip
         effect="dark"
-        content="新增主键"
+        content="创建主键(一对一关系)"
         placement="bottom"
       >
-        <EjIcon icon="primary"/>
+        <EjIcon icon="primary"  @click="addLine" />
       </el-tooltip>
       <el-tooltip
         effect="dark"
