@@ -2,6 +2,7 @@ import {reactive, ref, nextTick, watch} from 'vue'
 import ErgRenderer from '@/lib/canvas-render'
 import {nanoid} from "nanoid";
 import {cloneDeep, debounce} from 'lodash'
+import {ElMessageBox, ElMessage} from 'element-plus'
 
 export const drawState = reactive({
   // 缩放值
@@ -44,10 +45,10 @@ export function loadCanvas() {
     fontFamily: '-apple-system, Noto Sans, Helvetica Neue, Helvetica, Nimbus Sans L, Arial, Liberation Sans, PingFang SC, Hiragino Sans GB, Noto Sans CJK SC, Source Han Sans SC, Source Han Sans CN, Microsoft YaHei, Wenquanyi Micro Hei, WenQuanYi Zen Hei, ST Heiti, SimHei, WenQuanYi Zen Hei Sharp, sans-serif',
     externalFn: {
       addNode: addNodeSure,
-      // delNode: this.delNode,
+      delNode: delNode,
       // dbEntity: this.dbEntity,
       addLine: addLineSure,
-      // delLine: this.delLine,
+      delLine: delLine,
       // dbLine: this.dbLine,
       // addMark: this.addMarkSure,
       // delMark: this.delMark,
@@ -62,8 +63,10 @@ export function loadCanvas() {
 /** 通知画布创建实体*/
 export function addNode () {
   let str = nanoid(5)
+  let id = nanoid(8)
   const nodeData = {
-    id: nanoid(8),
+    id: id,
+    key: id,
     tableName: `表_${str}`,
     englishName: `en_${str}`,
     modelType: '',
@@ -105,3 +108,62 @@ export function addLineSure (lineData) {
     初始化数据
   * */
 }
+
+/**
+ * 删除节点*/
+export function delNode(id) {
+  const entity = drawState.drawData.nodeDataArray.find(it => it.key === id)
+  ElMessageBox.confirm(
+    `确认删除${entity.tableName}`,
+    'Warning',
+    {
+      confirmButtonText: '确认',
+      cancelButtonText: '取消',
+      type: 'warning',
+    }
+  )
+    .then(() => {
+      /**
+       * 删除实体
+       * 删除相关的线
+       * 更新绘图区
+       * */
+      drawState.drawData.nodeDataArray = drawState.drawData.nodeDataArray.filter(it => entity.key !== it.key)
+      drawState.drawData.linkDataArray = drawState.drawData.linkDataArray.filter(it => {
+        return entity.key !== it.from && entity.key !== it.to
+      })
+      updateData()
+      ElMessage({
+        type: 'success',
+        message: '操作成功',
+      })
+    })
+}
+
+export function delLine(key) {
+  const lineItem = drawState.drawData.linkDataArray.find(it => it.key === key)
+  ElMessageBox.confirm(
+    `确认删除${lineItem.tableName}`,
+    'Warning',
+    {
+      confirmButtonText: '确认',
+      cancelButtonText: '取消',
+      type: 'warning',
+    }
+  )
+    .then(() => {
+      /**
+       * 删除线
+       * 更新绘图区
+       * */
+      drawState.drawData.linkDataArray = drawState.drawData.linkDataArray.filter(it => lineItem.key !== it.key)
+      updateData()
+      ElMessage({
+        type: 'success',
+        message: '操作成功',
+      })
+    })
+}
+
+
+
