@@ -1,11 +1,14 @@
 <script setup>
+import Header from './header.vue'
 import PanelCenter from './PanelCenter.vue'
 import PanelLeft from './PanelLeft.vue'
 </script>
 
 <template>
   <div class="canvas-wrapper">
-    <div class="header">header</div>
+    <div class="header">
+      <Header></Header>
+    </div>
     <div class="main">
       <div class="left">
         <PanelLeft />
@@ -24,6 +27,8 @@ import PanelLeft from './PanelLeft.vue'
     .header {
       height: $head_height;
       background: #2c3e50;
+      display: flex;
+      align-items: center;
     }
 
     .main {
@@ -41,7 +46,7 @@ import PanelLeft from './PanelLeft.vue'
     }
 
     .canvas {
-      min-height: calc(100vh - $head_height);
+      height: calc(100vh - $head_height);
     }
   }
 </style>
