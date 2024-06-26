@@ -46,7 +46,7 @@ watch(() => entityState.entityIdChecked, (id) => {
     :title="state.data$.tableName"
     direction="rtl"
   >
-    <span>Hi, there!</span>
+    <span class="flex flex-1">Hi, there!</span>
   </el-drawer>
 </template>
 
