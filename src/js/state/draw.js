@@ -165,5 +165,15 @@ export function delLine(key) {
     })
 }
 
-
+/**
+ * 修改颜色
+ *  bug,
+ *    修改背景色 成功
+ *    修改边框颜色，背景色变
+ *    修改字体颜色，背景色变
+ * */
+export function changeColor(val, type) {
+  Erg.value.changeColor(val, type)
+  // updateData()
+}
 
