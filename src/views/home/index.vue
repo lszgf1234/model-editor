@@ -17,6 +17,7 @@ import PanelLeft from './PanelLeft.vue'
         <PanelCenter />
       </div>
     </div>
+
   </div>
 </template>
 <style lang="scss">

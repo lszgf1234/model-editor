@@ -6,7 +6,7 @@ import {data as mockData} from '@/js/mock/theme'
 
 import {drawState, canvasDataRef, loadCanvas} from '@/js/state/draw'
 
-// const {updateLineStatus, } = toRefs(drawState)
+import EntityView from '@/views/entity/index.vue'
 /**
  * 根据主题获取数据
  * 实体数据
@@ -112,6 +112,7 @@ function initData() {
   <div>
     <div id="canvas" class="canvas"></div>
   </div>
+  <EntityView />
 </div>
 </template>
 <style scoped>

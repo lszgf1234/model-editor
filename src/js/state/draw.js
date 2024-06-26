@@ -1,8 +1,9 @@
 import {reactive, ref, nextTick, watch} from 'vue'
 import ErgRenderer from '@/lib/canvas-render'
 import {nanoid} from "nanoid";
-import {cloneDeep, debounce} from 'lodash'
 import {ElMessageBox, ElMessage} from 'element-plus'
+
+import {state as stateEntity} from './entity'
 
 export const drawState = reactive({
   // 缩放值
@@ -46,10 +47,10 @@ export function loadCanvas() {
     externalFn: {
       addNode: addNodeSure,
       delNode: delNode,
-      // dbEntity: this.dbEntity,
+      dbEntity: dbEntity,
       addLine: addLineSure,
       delLine: delLine,
-      // dbLine: this.dbLine,
+      // dbLine: dbLine,
       addMark: addMarkSure,
       delMark: delMark,
       addNote: addNoteDialog,
@@ -76,8 +77,14 @@ export function addNode () {
 }
 /**
  * 确认新增实体*/
-export function addNodeSure (drawItem) {
-  drawState.drawData.nodeDataArray.push(drawItem)
+export function addNodeSure (obj) {
+  let amend = () => {
+    obj.width = 150
+    obj.height = 100
+  }
+  // 临时修正宽高，绘图区修改后去掉
+  amend()
+  drawState.drawData.nodeDataArray.push(obj)
   updateData()
 }
 
@@ -276,9 +283,13 @@ export function delMark(key) {
     })
 }
 
+/**
+ * 双击选中实体
+ * */
 
-
-
+export function dbEntity(id) {
+  stateEntity.entityIdChecked = id
+}
 
 
 

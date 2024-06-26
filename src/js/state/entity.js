@@ -1,5 +1,5 @@
 /*实体*/
-import {reactive} from '@vue/composition-api'
+import {reactive, nextTick} from 'vue'
 
 export const state = reactive({
   // 选中的实体id
@@ -11,3 +11,12 @@ export const state = reactive({
   addEntityData: {},
   dictionaries: [],
 })
+
+setTimeout(() => {
+  nextTick(() => {
+    state.entityIdChecked = 1
+  })
+}, 1500)
+
+
+
