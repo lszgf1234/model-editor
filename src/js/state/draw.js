@@ -51,9 +51,9 @@ export function loadCanvas() {
       delLine: delLine,
       // dbLine: this.dbLine,
       addMark: addMarkSure,
-      // delMark: this.delMark,
+      delMark: delMark,
       addNote: addNoteDialog,
-      // delNote: this.delNote,
+      delNote: delNote,
       // dbNote: this.dbNote,
       // $message: this.$message,
     },
@@ -210,6 +210,26 @@ function addNoteDialog(obj) {
       })
     })
 }
+// 删除标记文本
+export function delNote(key) {
+  ElMessageBox.confirm(
+    '确认彻删除标记文本',
+    'Warning',
+    {
+      confirmButtonText: 'OK',
+      cancelButtonText: 'Cancel',
+      type: 'warning',
+    }
+  )
+    .then(() => {
+      drawState.drawData.noteDataArray = drawState.drawData.noteDataArray.filter(it => it.key !== key)
+      updateData()
+      ElMessage({
+        type: 'success',
+        message: '操作成功',
+      })
+    })
+}
 
 /**
  * 创建矩形选框
@@ -228,4 +248,32 @@ export function addMarkSure(obj) {
   // 临时修正宽高，绘图区修改后去掉
   amend()
   drawState.drawData.markDataArray.push(obj)
+  updateData()
 }
+// 删除矩形选框
+export function delMark(key) {
+  ElMessageBox.confirm(
+    '确认彻删除标记框',
+    'Warning',
+    {
+      confirmButtonText: 'OK',
+      cancelButtonText: 'Cancel',
+      type: 'warning',
+    }
+  )
+    .then(() => {
+      drawState.drawData.markDataArray = drawState.drawData.markDataArray.filter(it => it.key !== key)
+      updateData()
+      ElMessage({
+        type: 'success',
+        message: '操作成功',
+      })
+    })
+}
+
+
+
+
+
+
+
