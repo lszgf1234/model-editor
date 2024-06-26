@@ -50,7 +50,7 @@ export function loadCanvas() {
       addLine: addLineSure,
       delLine: delLine,
       // dbLine: this.dbLine,
-      // addMark: this.addMarkSure,
+      addMark: addMarkSure,
       // delMark: this.delMark,
       addNote: addNoteDialog,
       // delNote: this.delNote,
@@ -214,5 +214,18 @@ function addNoteDialog(obj) {
 /**
  * 创建矩形选框
  * */
-export function addMark() {}
+export function addMark() {
+  Erg.value.addMark()
+}
 
+export function addMarkSure(obj) {
+  let amend = () => {
+    if (obj.width === 0 && obj.height === 0) {
+      obj.width = 50
+      obj.height = 50
+    }
+  }
+  // 临时修正宽高，绘图区修改后去掉
+  amend()
+  drawState.drawData.markDataArray.push(obj)
+}
