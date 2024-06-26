@@ -11,7 +11,8 @@ import {computed, reactive, watch} from 'vue'
 import {cloneDeep} from 'lodash'
 
 import {state as entityState} from '@/js/state/entity.js'
-import {drawState} from '@/js/state/draw.js'
+import {drawState, updateData} from '@/js/state/draw.js'
+import EjDisplayEdit from '@/components/display-editor'
 
 const visible = computed({
   get () {
@@ -37,6 +38,28 @@ watch(() => entityState.entityIdChecked, (id) => {
 })
 
 
+/**
+ * 更新draw data
+ * 找到当前表
+ * 删除，1 添加
+ * */
+function saveTable () {
+  const index = drawState.drawData.nodeDataArray.findIndex(it => state.data$.id === it.id)
+
+  const data = cloneDeep(state.data$)
+  drawState.drawData.nodeDataArray.splice(index, 1, data)
+  updateData()
+
+  /*
+  * 保存实体信息
+  * 初始化数据源
+  * */
+
+}
+
+function close () {
+  visible.value = false
+}
 
 </script>
 
@@ -45,11 +68,37 @@ watch(() => entityState.entityIdChecked, (id) => {
     v-model="visible"
     :title="state.data$.tableName"
     direction="rtl"
+    class="entity-view"
+    :size="1000"
   >
-    <span class="flex flex-1">Hi, there!</span>
+    <div class="flex mb-6 table-info px-3">
+      <div class="flex flex-1 items-center">
+        <span class="label">实体中文名称</span>
+        <ej-display-edit v-model:val="state.data$.tableName"  @change="saveTable"></ej-display-edit>
+      </div>
+      <div class="flex flex-1 items-center">
+        <span class="label">实体英文名称</span>
+        <ej-display-edit v-model:val="state.data$.englishName"  @change="saveTable"/>
+      </div>
+    </div>
   </el-drawer>
 </template>
 
-<style scoped>
+<style lang="scss">
+.entity-view {
+  width: 700px;
 
+  .table-info {
+    font-size: 15px;
+    min-height: 28px;
+
+    .label {
+      @apply mr-2;
+    }
+
+    .el-input {
+      width: 180px;
+    }
+  }
+}
 </style>
