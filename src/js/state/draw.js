@@ -52,7 +52,7 @@ export function loadCanvas() {
       // dbLine: this.dbLine,
       // addMark: this.addMarkSure,
       // delMark: this.delMark,
-      // addNote: this.addNoteDialog,
+      addNote: addNoteDialog,
       // delNote: this.delNote,
       // dbNote: this.dbNote,
       // $message: this.$message,
@@ -176,4 +176,43 @@ export function changeColor(val, type) {
   Erg.value.changeColor(val, type)
   // updateData()
 }
+
+/**
+ * 新增备注
+ * */
+export function addNote() {
+  Erg.value.addNote()
+}
+
+function addNoteDialog(obj) {
+  ElMessageBox.prompt('请输入备注', 'Tip', {
+    confirmButtonText: 'OK',
+    cancelButtonText: 'Cancel',
+    inputValidator(val) {
+      return val ? true: '请输入'
+    }
+  })
+    .then(({ value }) => {
+      const it = drawState.drawData.noteDataArray.find(it => it.key === obj.key)
+      if (it) {
+        it.text = value
+      } else {
+        drawState.drawData.noteDataArray.push({
+          ...obj,
+          text: value
+        })
+      }
+      updateData()
+
+      ElMessage({
+        type: 'success',
+        message: `操作成功`,
+      })
+    })
+}
+
+/**
+ * 创建矩形选框
+ * */
+export function addMark() {}
 
