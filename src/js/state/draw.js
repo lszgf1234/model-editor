@@ -54,7 +54,7 @@ export function loadCanvas() {
       delMark: delMark,
       addNote: addNoteDialog,
       delNote: delNote,
-      // dbNote: this.dbNote,
+      dbNote: dbNote,
       // $message: this.$message,
     },
   })
@@ -188,6 +188,7 @@ function addNoteDialog(obj) {
   ElMessageBox.prompt('请输入备注', 'Tip', {
     confirmButtonText: 'OK',
     cancelButtonText: 'Cancel',
+    inputValue: obj.text,
     inputValidator(val) {
       return val ? true: '请输入'
     }
@@ -231,6 +232,10 @@ export function delNote(key) {
     })
 }
 
+export function dbNote(key) {
+  const it = drawState.drawData.noteDataArray.find(it => it.key === key)
+  addNoteDialog(it, key)
+}
 /**
  * 创建矩形选框
  * */
