@@ -148,3 +148,179 @@ export const data = {
   isFiles: false,// 是否是文件夹
   status: '主题状态',
 }
+
+const drawData = {
+  "nodeDataArray": [
+    {
+      "key": 1,
+      "loc": {
+        "x": 14,
+        "y": 63
+      },
+      "width": 150,
+      "height": 150,
+      "bgC": "#8080FF",
+      "tableName": "表2222",
+      "attributes": [
+        {
+          "attrName": "属性名1",
+          "primaryKey": true,
+          "foreignKey": false
+        },
+        {
+          "attrName": "属性名3",
+          "primaryKey": false
+        },
+        {
+          "attrName": "属性名2222222222",
+          "primaryKey": false
+        }
+      ],
+      "checkoutInfo": {
+        "operator": 2,
+        "imgUrl": "https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1577153562&di=707f4dafb7a30c1d4486d086e29113eb&imgtype=jpg&er=1&src=http%3A%2F%2Fimg2015.zdface.com%2F20191128%2F494953ca4b98166a13dd8d7f8eced177.jpg"
+      },
+      "id": 1,
+      "englishName": "en2",
+      "modelType": ""
+    },
+    {
+      "id": "F32gtECi",
+      "key": "F32gtECi",
+      "tableName": "表_wIPOW",
+      "englishName": "en_wIPOW",
+      "modelType": "",
+      "attributes": [
+        {
+          "attrName": "属性1",
+          "primaryKey": true,
+          "foreignKey": false
+        },
+        {
+          "attrName": "属性2",
+          "primaryKey": false,
+          "foreignKey": false
+        }
+      ],
+      "loc": {
+        "x": 288,
+        "y": 93
+      },
+      "width": 150,
+      "height": 100
+    },
+    {
+      "id": "08q9Ecv1",
+      "key": "08q9Ecv1",
+      "tableName": "表_ut-Ix",
+      "englishName": "en_ut-Ix",
+      "modelType": "",
+      "attributes": [
+        {
+          "attrName": "属性1",
+          "primaryKey": true,
+          "foreignKey": false
+        },
+        {
+          "attrName": "属性2",
+          "primaryKey": false,
+          "foreignKey": false
+        }
+      ],
+      "loc": {
+        "x": 605,
+        "y": 116
+      },
+      "width": 150,
+      "height": 100
+    },
+    {
+      "id": "Oj-9WgKn",
+      "key": "Oj-9WgKn",
+      "tableName": "表_NU96j",
+      "englishName": "en_NU96j",
+      "modelType": "",
+      "attributes": [
+        {
+          "attrName": "属性1",
+          "primaryKey": true,
+          "foreignKey": false
+        },
+        {
+          "attrName": "属性2",
+          "primaryKey": false,
+          "foreignKey": false
+        }
+      ],
+      "loc": {
+        "x": 317,
+        "y": 321
+      },
+      "width": 150,
+      "height": 100
+    }
+  ],
+  "linkDataArray": [
+    {
+      "key": "171947936095680400",
+      "from": 1,
+      "to": "F32gtECi",
+      "pos": [
+        {
+          "x": 164,
+          "y": 143
+        },
+        {
+          "x": 226,
+          "y": 143
+        },
+        {
+          "x": 226,
+          "y": 143
+        },
+        {
+          "x": 288,
+          "y": 143
+        }
+      ],
+      "type": "primaryKey"
+    },
+    {
+      "key": "171947937040321913",
+      "from": "Oj-9WgKn",
+      "to": "F32gtECi",
+      "pos": [
+        {
+          "x": 377,
+          "y": 321
+        },
+        {
+          "x": 377,
+          "y": 257
+        },
+        {
+          "x": 377,
+          "y": 257
+        },
+        {
+          "x": 377,
+          "y": 193
+        }
+      ],
+      "type": "foreignKey"
+    }
+  ],
+  "markDataArray": [],
+  "noteDataArray": [
+    {
+      "key": "157837643603536658",
+      "loc": {
+        "x": 74,
+        "y": 306
+      },
+      "text": "啦啦啦啦啦111",
+      "type": "note",
+      "color": "#0000ff"
+    }
+  ]
+}

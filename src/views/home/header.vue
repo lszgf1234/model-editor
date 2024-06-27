@@ -5,7 +5,7 @@ import {
 
 import EjIcon from '@/components/ej-icon'
 
-import {addNode, addLine, changeColor, addNote, addMark} from '@/js/state/draw'
+import {addNode, addLine, changeColor, addNote, addMark, exportData} from '@/js/state/draw'
 import enumerate from '@/js/enum'
 /**
  * 头部-实体
@@ -119,6 +119,20 @@ import enumerate from '@/js/enum'
         placement="bottom"
       >
         <EjIcon icon="rectangle"  @click="addMark" />
+      </el-tooltip>
+      <el-tooltip
+        effect="dark"
+        content="导出"
+        placement="bottom"
+      >
+        <EjIcon icon="export"  @click="exportData" />
+      </el-tooltip>
+      <el-tooltip
+        effect="dark"
+        content="导入-待开放"
+        placement="bottom"
+      >
+        <EjIcon class="is-disabled" icon="import" />
       </el-tooltip>
     </el-space>
   </div>

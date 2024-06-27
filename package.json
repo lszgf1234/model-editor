@@ -27,6 +27,7 @@
     "autoprefixer": "^10.4.19",
     "eslint": "^8.57.0",
     "eslint-plugin-vue": "^9.23.0",
+    "file-saver": "^2.0.5",
     "jsdom": "^24.1.0",
     "lodash": "^4.17.21",
     "nanoid": "^5.0.7",

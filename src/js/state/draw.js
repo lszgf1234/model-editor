@@ -4,6 +4,7 @@ import {nanoid} from "nanoid";
 import {ElMessageBox, ElMessage} from 'element-plus'
 
 import {state as stateEntity} from './entity'
+import {saveJson} from '@/utils/file.js'
 
 export const drawState = reactive({
   // 缩放值
@@ -292,6 +293,27 @@ export function delMark(key) {
 
 export function dbEntity(id) {
   stateEntity.entityIdChecked = id
+}
+
+/**
+ * 导出数据
+ * 绘图数据
+ * 实体
+ * 关系
+ * */
+export function exportData() {
+  const data = {
+    entityInfos: drawState.drawData.nodeDataArray.map(({key, tableName, englishName, id, attributes, modelType}) => ({
+      key, tableName, englishName, id, attributes, modelType
+    })),
+    relation: drawState.drawData.linkDataArray.map(({key, from, to, type}) => ({
+      key, from, to, type
+    })),
+    graphics: JSON.stringify(drawState.drawData),
+  }
+
+  saveJson(data)
+
 }
 
 
