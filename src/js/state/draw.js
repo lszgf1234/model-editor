@@ -315,6 +315,8 @@ export function exportData() {
   saveJson(data)
 
 }
-
+export function setScale(val) {
+  Erg.value.changeCanvasScale(parseInt(val))
+}
 
 

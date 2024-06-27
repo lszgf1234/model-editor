@@ -2,10 +2,11 @@
 import {
   DocumentAdd
 } from '@element-plus/icons-vue'
+import {ref} from 'vue'
 
 import EjIcon from '@/components/ej-icon'
 
-import {addNode, addLine, changeColor, addNote, addMark, exportData} from '@/js/state/draw'
+import {addNode, addLine, changeColor, addNote, addMark, exportData, setScale} from '@/js/state/draw'
 import enumerate from '@/js/enum'
 /**
  * 头部-实体
@@ -34,6 +35,7 @@ import enumerate from '@/js/enum'
  *
  *  */
 
+const scaleVal = ref('100%')
 
 </script>
 <template>
@@ -122,17 +124,80 @@ import enumerate from '@/js/enum'
       </el-tooltip>
       <el-tooltip
         effect="dark"
-        content="导出"
+        content="导出json"
         placement="bottom"
       >
-        <EjIcon icon="export"  @click="exportData" />
+        <EjIcon icon="json-export"  @click="exportData" />
       </el-tooltip>
       <el-tooltip
         effect="dark"
-        content="导入-待开放"
+        content="导入json"
         placement="bottom"
       >
-        <EjIcon class="is-disabled" icon="import" />
+        <EjIcon class="is-disabled" icon="json-import" />
+      </el-tooltip>
+      <el-tooltip
+        effect="dark"
+        content="导入excel"
+        placement="bottom"
+      >
+        <EjIcon class="is-disabled" icon="excel-import" />
+      </el-tooltip>
+      <el-tooltip
+        effect="dark"
+        content="导入ErWin"
+        placement="bottom"
+      >
+        <EjIcon class="is-disabled" icon="erwin-import" />
+      </el-tooltip>
+      <el-tooltip
+        effect="dark"
+        content="生成ddl"
+        placement="bottom"
+      >
+        <EjIcon class="is-disabled" icon="save-ddl" />
+      </el-tooltip>
+      <el-tooltip
+        effect="dark"
+        content="逆向工程"
+        placement="bottom"
+      >
+        <EjIcon class="is-disabled" icon="reverse" />
+      </el-tooltip>
+      <el-tooltip
+        effect="dark"
+        content="生成物理模型"
+        placement="bottom"
+      >
+        <EjIcon class="is-disabled" icon="generate" />
+      </el-tooltip>
+      <el-tooltip
+        effect="dark"
+        content="模型检查"
+        placement="bottom"
+      >
+        <EjIcon class="is-disabled" icon="examine" />
+      </el-tooltip>
+      <el-tooltip
+        effect="dark"
+        content="缩放"
+        placement="bottom"
+      >
+        <el-select
+          v-model="scaleVal"
+          placeholder="Select"
+          size="small"
+          style="width: 80px"
+          @change="setScale"
+        >
+          <el-option
+            v-for="n of ['60%', '80%', '100%', '120%', '140%', '160%', '180%', '200%']"
+            :key="n"
+            :label="n"
+            :value="n"
+          />
+        </el-select>
+
       </el-tooltip>
     </el-space>
   </div>
