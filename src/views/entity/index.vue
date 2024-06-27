@@ -86,24 +86,24 @@ function close () {
       <el-tab-pane label="属性" name="n1">
         <AttrView />
       </el-tab-pane>
-<!--      <el-tab-pane label="索引" name="n2">
-        <indexes-view :activeName="activeName"/>
+      <el-tab-pane label="索引" name="n2">
+        <el-empty description="构建中" />
       </el-tab-pane>
       <el-tab-pane disabled label="物理表" name="n3">
-        <physical-view v-if="0" :activeName="activeName"/>
+       <el-empty description="构建中" />
       </el-tab-pane>
       <el-tab-pane label="引用" name="n4">
-        <quotes-view :activeName="activeName"/>
+        <el-empty description="构建中" />
       </el-tab-pane>
       <el-tab-pane label="操作日志" name="n5">
-        <log-view :activeName="activeName"/>
+        <el-empty description="构建中" />
       </el-tab-pane>
       <el-tab-pane label="备注" name="n6">
-        <remark-view :activeName="activeName"/>
+        <el-empty description="构建中" />
       </el-tab-pane>
       <el-tab-pane disabled label="答疑区" name="n7">
-        6
-      </el-tab-pane>-->
+        <el-empty description="构建中" />
+      </el-tab-pane>
     </el-tabs>
   </el-drawer>
 </template>
