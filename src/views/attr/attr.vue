@@ -12,6 +12,7 @@
 *
 * */
 import {nanoid} from "nanoid";
+import { VueDraggable, vDraggable } from 'vue-draggable-plus'
 import EjDisplayEdit from '@/components/display-editor'
 import EjIcon from "@/components/ej-icon/index.js";
 import {reactive, watch} from "vue";
@@ -53,6 +54,10 @@ function add() {
   state.data$.push(obj)
   saveAttrs()
 }
+
+function sort(val) {
+  saveAttrs()
+}
 </script>
 
 <template>
@@ -69,43 +74,60 @@ function add() {
           <th class="text-left checkbox-th">非空</th>
         </tr>
         </thead>
-        <tr v-for="(it, idx) of state.data$" :key="idx">
-          <td class="text-th">
-            <ej-display-edit v-model:val="it.attrName"
-                             @change="() => {saveAttrs()}"
-                             class="table-autocomplete"/>
-          </td>
-          <td>
-            <ej-display-edit v-model:val="it.columnName"
-                             @change="() => {saveAttrs()}"
-                             class="table-autocomplete">
-            </ej-display-edit>
-          </td>
-          <td>
-            <el-select size="small"
-                       v-model="it.columnType"
-                       placeholder="请选择"
-                       @change="saveAttrs(it)"
-                       class="table-select">
-              <el-option v-for="(itChild) of attrEnum.attrTypes"
-                         :value="itChild.value"
-                         :label="itChild.value"
-                         :key="itChild.value">
-              </el-option>
-            </el-select>
-          </td>
-          <td>
-            <el-checkbox :disabled="it.foreignKey" v-model="it.primaryKey" @change="saveAttrs(it, idx)"></el-checkbox>
-          </td>
-          <td>
-            <el-checkbox disabled v-model="it.foreignKey" @change="saveAttrs(it)"></el-checkbox>
-          </td>
-          <td>
-            <el-checkbox :disabled="it.primaryKey"
-                         v-model="it.notEmpty"
-                         @change="saveAttrs(it, idx)"></el-checkbox>
-          </td>
-        </tr>
+        <tbody
+          v-draggable="[
+            state.data$,
+            {
+              // animation: 150,
+              onEnd(val) {
+                sort(val)
+              },
+
+            }
+          ]
+        ">
+
+<!--          <VueDraggable v-model="state.data$">-->
+            <tr v-for="(it, idx) of state.data$" :key="idx">
+              <td class="text-th">
+                <ej-display-edit v-model:val="it.attrName"
+                                 @change="() => {saveAttrs()}"
+                                 class="table-autocomplete"/>
+              </td>
+              <td>
+                <ej-display-edit v-model:val="it.columnName"
+                                 @change="() => {saveAttrs()}"
+                                 class="table-autocomplete">
+                </ej-display-edit>
+              </td>
+              <td>
+                <el-select size="small"
+                           v-model="it.columnType"
+                           placeholder="请选择"
+                           @change="saveAttrs(it)"
+                           class="table-select">
+                  <el-option v-for="(itChild) of attrEnum.attrTypes"
+                             :value="itChild.value"
+                             :label="itChild.value"
+                             :key="itChild.value">
+                  </el-option>
+                </el-select>
+              </td>
+              <td>
+                <el-checkbox :disabled="it.foreignKey" v-model="it.primaryKey" @change="saveAttrs(it, idx)"></el-checkbox>
+              </td>
+              <td>
+                <el-checkbox disabled v-model="it.foreignKey" @change="saveAttrs(it)"></el-checkbox>
+              </td>
+              <td>
+                <el-checkbox :disabled="it.primaryKey"
+                             v-model="it.notEmpty"
+                             @change="saveAttrs(it, idx)"></el-checkbox>
+              </td>
+            </tr>
+<!--          </VueDraggable>-->
+        </tbody>
+
       </table>
       <a href="javascript:" @click="add" class="dqs-btn dqs-btn-white btn-add">
         <ej-icon icon="plus" class="icon-add"></ej-icon>
