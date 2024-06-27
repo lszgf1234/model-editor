@@ -1,0 +1,30 @@
+.drag-table {
+  @apply text-gray-darker;
+
+  thead {
+    @apply text-gray-dark;
+  }
+
+  th, td {
+    @apply p-1;
+    border-bottom: 1px solid theme('colors.gray.light');
+  }
+
+  tr > :first-child, tr > :last-child {
+    @apply pl-2;
+  }
+
+  tbody tr {
+    & {
+      cursor: move;
+    }
+
+    &:hover {
+      @apply bg-gray-lighter;
+    }
+
+    td {
+      transition: background-color .25s ease;
+    }
+  }
+}

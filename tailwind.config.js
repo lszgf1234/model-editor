@@ -12,7 +12,6 @@ export default {
 
         black: '#000',
         white: '#fff',
-
         gray: {
           lightest: '#fafafa',
           lighter: '#f5f5f5',
@@ -21,6 +20,7 @@ export default {
           dark: '#999',
           darker: '#666',
           darkest: '#333',
+          line: '#f4f4f4',
         },
         red: {
           lighter: '#ffe1e1',
@@ -46,6 +46,7 @@ export default {
           lighter: '#e2ecff',
           light: '#9cbaf2',
           default: '#477de9',
+          hover: '#ECF2FC',
         },
         purple: {
           lighter: '#ebdfff',

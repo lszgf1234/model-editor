@@ -23,6 +23,8 @@ function enumerate () {
       ENUM[k][item.key] = item
     })
   }
+  window.ENUM1 = ENUM
+
   return ENUM
 }
 

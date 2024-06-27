@@ -13,6 +13,7 @@ import {cloneDeep} from 'lodash'
 import {state as entityState} from '@/js/state/entity.js'
 import {drawState, updateData} from '@/js/state/draw.js'
 import EjDisplayEdit from '@/components/display-editor'
+import AttrView from '@/views/attr/attr.vue'
 
 const visible = computed({
   get () {
@@ -25,12 +26,12 @@ const visible = computed({
 })
 
 let state = reactive({
-  data$: {}
+  data$: {},
+  activeName: 'n1',
 })
 
 watch(() => entityState.entityIdChecked, (id) => {
   if (!id) return
-  console.log('------', drawState.drawData, entityState.entityIdChecked)
   const entityData = drawState.drawData?.nodeDataArray?.find(it => it.key === entityState.entityIdChecked) || {}
   state.data$ = cloneDeep(entityData)
 }, {
@@ -41,7 +42,7 @@ watch(() => entityState.entityIdChecked, (id) => {
 /**
  * 更新draw data
  * 找到当前表
- * 删除，1 添加
+ * 删除，1 添
  * */
 function saveTable () {
   const index = drawState.drawData.nodeDataArray.findIndex(it => state.data$.id === it.id)
@@ -74,13 +75,36 @@ function close () {
     <div class="flex mb-6 table-info px-3">
       <div class="flex flex-1 items-center">
         <span class="label">实体中文名称</span>
-        <ej-display-edit v-model:val="state.data$.tableName"  @change="saveTable"></ej-display-edit>
+        <ej-display-edit v-model:val="state.data$.tableName" @change="saveTable"></ej-display-edit>
       </div>
       <div class="flex flex-1 items-center">
         <span class="label">实体英文名称</span>
-        <ej-display-edit v-model:val="state.data$.englishName"  @change="saveTable"/>
+        <ej-display-edit v-model:val="state.data$.englishName" @change="saveTable"/>
       </div>
     </div>
+    <el-tabs v-model="state.activeName" class="table-tabs flex-grow">
+      <el-tab-pane label="属性" name="n1">
+        <AttrView />
+      </el-tab-pane>
+<!--      <el-tab-pane label="索引" name="n2">
+        <indexes-view :activeName="activeName"/>
+      </el-tab-pane>
+      <el-tab-pane disabled label="物理表" name="n3">
+        <physical-view v-if="0" :activeName="activeName"/>
+      </el-tab-pane>
+      <el-tab-pane label="引用" name="n4">
+        <quotes-view :activeName="activeName"/>
+      </el-tab-pane>
+      <el-tab-pane label="操作日志" name="n5">
+        <log-view :activeName="activeName"/>
+      </el-tab-pane>
+      <el-tab-pane label="备注" name="n6">
+        <remark-view :activeName="activeName"/>
+      </el-tab-pane>
+      <el-tab-pane disabled label="答疑区" name="n7">
+        6
+      </el-tab-pane>-->
+    </el-tabs>
   </el-drawer>
 </template>
 

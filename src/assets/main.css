@@ -7,3 +7,16 @@
     cursor: not-allowed;
     /*pointer-events: none;*/
 }
+
+.dqs-btn {
+    @apply inline-flex items-center justify-center bg-blue-default text-white;
+
+    border-radius: 4px;
+    border: 1px solid theme('colors.blue.default');
+}
+
+.dqs-btn-white {
+    @apply bg-white text-black;
+
+    border-color: theme('colors.gray.light');
+}
