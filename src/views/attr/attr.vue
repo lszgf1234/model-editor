@@ -87,8 +87,7 @@ function sort(val) {
           ]
         ">
 
-<!--          <VueDraggable v-model="state.data$">-->
-            <tr v-for="(it, idx) of state.data$" :key="idx">
+          <tr v-for="(it, idx) of state.data$" :key="idx">
               <td class="text-th">
                 <ej-display-edit v-model:val="it.attrName"
                                  @change="() => {saveAttrs()}"
@@ -125,7 +124,6 @@ function sort(val) {
                              @change="saveAttrs(it, idx)"></el-checkbox>
               </td>
             </tr>
-<!--          </VueDraggable>-->
         </tbody>
 
       </table>
