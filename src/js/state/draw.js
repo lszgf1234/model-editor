@@ -71,7 +71,10 @@ export function addNode () {
     tableName: `表_${str}`,
     englishName: `en_${str}`,
     modelType: '',
-    attributes: []
+    attributes: [
+      {attrName: '属性1', primaryKey: true, foreignKey: false},
+      {attrName: '属性2', primaryKey: false, foreignKey: false},
+    ]
   }
   Erg.value.addNode(nodeData)
 }

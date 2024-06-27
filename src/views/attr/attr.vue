@@ -82,7 +82,6 @@ function sort(val) {
               onEnd(val) {
                 sort(val)
               },
-
             }
           ]
         ">

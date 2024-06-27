@@ -71,6 +71,7 @@ function close () {
     direction="rtl"
     class="entity-view"
     :size="1000"
+    :close-on-click-modal="false"
   >
     <div class="flex mb-6 table-info px-3">
       <div class="flex flex-1 items-center">

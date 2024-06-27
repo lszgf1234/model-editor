@@ -108,19 +108,6 @@ export const data = {
   graphics: graphics,
   entityInfos: [ // 实体信息
     {
-      id: 0,
-      tableName: '表1',
-      englishName: 'en1',
-      modelType: '',
-      attributes: [
-        {attrName: '属性名1', primaryKey: true, foreignKey: false},
-        {attrName: '属性名3', primaryKey: true},
-        {attrName: '属性名2222222222', primaryKey: true},
-      ],
-      width: 150,
-      height: 150,
-    },
-    {
       id: 1,
       tableName: '表2222',
       englishName: 'en2',
@@ -142,6 +129,8 @@ export const data = {
         {attrName: '属性名1', primaryKey: false, foreignKey: false},
         {attrName: '属性名3', primaryKey: false}
       ],
+      width: 150,
+      height: 150,
     },
     {
       id: 3,
@@ -152,6 +141,8 @@ export const data = {
         {attrName: '属性名1', primaryKey: false, foreignKey: false},
         {attrName: '属性名3', primaryKey: false}
       ],
+      width: 150,
+      height: 150,
     },
   ],
   isFiles: false,// 是否是文件夹
