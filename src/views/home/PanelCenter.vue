@@ -1,10 +1,11 @@
 
 <script setup>
-import {onMounted, nextTick} from 'vue'
+import {onMounted, nextTick, watch} from 'vue'
 import {cloneDeep} from 'lodash'
 import {data as mockData} from '@/js/mock/theme'
 
-import {drawState, canvasDataRef, loadCanvas} from '@/js/state/draw'
+import {drawState, canvasDataRef, loadCanvas, updateData} from '@/js/state/draw'
+import {state as themeState} from '@/js/state/theme.js'
 
 import EntityView from '@/views/entity/index.vue'
 /**
@@ -14,16 +15,22 @@ import EntityView from '@/views/entity/index.vue'
  * 绘图数据
  * */
 onMounted(() => {
-  initData()
+  initData(true)
 })
 
-function initData() {
+watch(() =>themeState.checkedThemeId, () => {
+  initData()
+})
+function initData(isFirst = false) {
   /* 组装绘图数据
              获取图形数据
              获取实体数据
              根据节点的key与实体的id，组装节点信息
              */
-  let data = mockData
+  let data = {}
+  if (themeState.checkedThemeId === mockData.id) {
+    data = mockData
+  }
   let entities = data.entityInfos instanceof Array ? data.entityInfos : []
   /*if (entities.length) {
     entities.forEach(it => {
@@ -103,7 +110,12 @@ function initData() {
   drawState.panelVisible = true
   // 更新实体信息
   // drawState.entityUpdateData++
-  loadCanvas()
+  if (isFirst) {
+    loadCanvas()
+  } else {
+    updateData()
+  }
+
 }
 
 </script>

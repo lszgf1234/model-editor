@@ -1,5 +1,7 @@
 import { nanoid } from 'nanoid'
 
+import {checkedThemeId} from './checkedThemeId.js'
+
 export const dataEg = {
   id: nanoid(10),
   themeName: '主题名称',
@@ -660,7 +662,7 @@ const entityInfos = [
 ]
 
 export const data = {
-  id: nanoid(10),
+  id: checkedThemeId,
   themeName: '主题名称',
   parentId: nanoid(10), // 主题父Id
 

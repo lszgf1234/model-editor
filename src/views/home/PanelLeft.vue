@@ -8,7 +8,9 @@ import {cloneDeep} from 'lodash'
 import {nanoid} from "nanoid";
 
 import {data} from '@/js/mock/theme1.js'
+import {checkedThemeId} from '@/js/mock/checkedThemeId.js'
 import {convertTree} from '@/utils/toTree.js'
+import {state as themeState} from '@/js/state/theme.js'
 import EjIcon from '@/components/ej-icon'
 
 const {proxy} = getCurrentInstance()
@@ -28,6 +30,7 @@ function initData() {
 async function init() {
   await getData()
   initData()
+  showDraw(checkedThemeId)
 }
 
 init()
@@ -59,7 +62,7 @@ function edit(data) {// debugger
 }
 
 function rename(id){
-  const idx = state.dataList.findIndex(it => it.id === data.id)
+  const idx = state.dataList.findIndex(it => it.id === id)
   state.dataList.splice(idx, 1, {
     ...data,
     isEdit: true,
@@ -78,7 +81,7 @@ function del(id) {
     }
   )
     .then(() => {
-      const idx = state.dataList.findIndex(it => it.id === data.id)
+      const idx = state.dataList.findIndex(it => it.id === id)
       state.dataList.splice(idx, 1)
       initData()
       proxy.$message({
@@ -88,6 +91,9 @@ function del(id) {
     })
 }
 
+function showDraw(id) {
+  themeState.checkedThemeId = id
+}
 </script>
 <template>
 <div class="px-5 py-3">
@@ -102,13 +108,15 @@ function del(id) {
         :expand-on-click-node="false"
         :teleported="false"
       >
-        <template #default="{ node, data }">
-          <div class="flex-grow flex pr-4 base-input-wrap">
+        <template #default="{ data }">
+          <div class="flex-grow flex pr-4 base-input-wrap" :class="{
+            active: themeState.checkedThemeId === data.id
+          }">
             <div v-if="!data.isEdit"
                  class="flex-grow flex items-center hide-dropdown">
               <ej-icon :icon="data.isFiles ? 'folder' : 'file'" class="my-icon mr-1"
                        :class="{'text-blue': data.isFiles}"></ej-icon>
-              <span v-if="!data.isFiles" class="flex-grow">{{data.themeName}}</span>
+              <span v-if="!data.isFiles" class="flex-grow theme-name" @click="showDraw(data.id)">{{data.themeName}}</span>
               <span v-else class="flex-grow">{{data.themeName}}</span>
               <el-dropdown class="ml-auto my-dropdown">
                 <div class="el-dropdown-link">
@@ -181,6 +189,15 @@ function del(id) {
 
   .files {
     color: #F2F7FF;
+  }
+
+  .base-input-wrap.active {
+    .theme-name {
+      @apply text-blue-default
+    }
+    .my-icon {
+      @apply fill-blue-default
+    }
   }
 }
 </style>

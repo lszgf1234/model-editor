@@ -2,6 +2,7 @@
 import Header from './header.vue'
 import PanelCenter from './PanelCenter.vue'
 import PanelLeft from './PanelLeft.vue'
+import {state as themeState} from "@/js/state/theme.js";
 </script>
 
 <template>
@@ -13,7 +14,7 @@ import PanelLeft from './PanelLeft.vue'
       <div class="left">
         <PanelLeft />
       </div>
-      <div class="content">
+      <div class="content" v-if="themeState.checkedThemeId">
         <PanelCenter />
       </div>
     </div>

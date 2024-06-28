@@ -1,25 +1,4 @@
-export const tree = [{
-  id: 1,
-  themeName: '一级 1',
-  isFiles: true,
-  children: [{
-    id: 4,
-    themeName: '二级 1-1',
-    isFiles: true,
-    children: [{
-      id: 9,
-      themeName: '三级 1-1-1',
-    }, {
-      id: 10,
-      themeName: '三级 1-1-2',
-    }],
-  }],
-}, {
-  id: 2,
-  themeName: '一级 2',
-  children: [],
-  isFiles: true,
-}]
+import {checkedThemeId} from "@/js/mock/checkedThemeId.js";
 
 export const data = [{
   id: 1,
@@ -27,7 +6,7 @@ export const data = [{
   themeName: '主题树',
   isFiles: true,
 }, {
-  id: '111',
+  id: checkedThemeId,
   themeName: '模型工具库',
   isFiles: false,
   parentId: 1,
