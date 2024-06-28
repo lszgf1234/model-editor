@@ -11,6 +11,8 @@
 * 同步更新 实体属性
 *
 * */
+import {Delete} from '@element-plus/icons-vue'
+import {ElMessageBox, ElMessage} from 'element-plus'
 import {nanoid} from "nanoid";
 import { VueDraggable, vDraggable } from 'vue-draggable-plus'
 import EjDisplayEdit from '@/components/display-editor'
@@ -58,6 +60,26 @@ function add() {
 function sort(val) {
   saveAttrs()
 }
+
+function del(it, idx) {
+  ElMessageBox.confirm(
+    '确认删除 ?',
+    'Warning',
+    {
+      confirmButtonText: 'OK',
+      cancelButtonText: 'Cancel',
+      type: 'warning',
+    }
+  )
+    .then(() => {
+      state.data$.splice(idx, 1)
+      saveAttrs()
+      ElMessage({
+        type: 'success',
+        message: 'Delete completed',
+      })
+    })
+}
 </script>
 
 <template>
@@ -72,6 +94,7 @@ function sort(val) {
           <th class="text-left checkbox-th">主键</th>
           <th class="text-left checkbox-th">外键</th>
           <th class="text-left checkbox-th">非空</th>
+          <th class="text-left checkbox-th">操作</th>
         </tr>
         </thead>
         <tbody
@@ -121,6 +144,22 @@ function sort(val) {
                 <el-checkbox :disabled="it.primaryKey"
                              v-model="it.notEmpty"
                              @change="saveAttrs(it, idx)"></el-checkbox>
+              </td>
+              <td>
+                <el-tooltip
+                  class="box-item"
+                  effect="dark"
+                  content="删除"
+                  placement="bottom"
+                >
+                  <el-button
+                    type="danger"
+                    :icon="Delete"
+                    circle
+                    size="small"
+                    @click="del(it, idx)"
+                  />
+                </el-tooltip>
               </td>
             </tr>
         </tbody>
