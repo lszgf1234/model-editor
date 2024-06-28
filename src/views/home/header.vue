@@ -40,7 +40,7 @@ const scaleVal = ref('100%')
   <div class="header-wrapper px-5">
     <div class="logo flex align-items">
       <EjIcon class="icon" icon="erwin-import" />
-      <span class="ml-2">模型工具据</span>
+      <span class="ml-2">模型工具</span>
     </div>
     <el-space class="tools">
       <el-tooltip
