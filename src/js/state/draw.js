@@ -320,4 +320,9 @@ export function setScale(val) {
   Erg.value.changeCanvasScale(parseInt(val))
 }
 
+export function setEditable(val) {
+  Erg.value.setEditable(val)
+
+}
+
 

@@ -1,12 +1,9 @@
 <script setup>
-import {
-  DocumentAdd
-} from '@element-plus/icons-vue'
 import {ref} from 'vue'
 
 import EjIcon from '@/components/ej-icon'
 
-import {addNode, addLine, changeColor, addNote, addMark, exportData, setScale} from '@/js/state/draw'
+import {addNode, addLine, changeColor, addNote, addMark, exportData, setScale, setEditable} from '@/js/state/draw'
 import enumerate from '@/js/enum'
 import avatar from '@/assets/img/avatar.png'
 /**
@@ -190,6 +187,21 @@ const scaleVal = ref('100%')
       <el-divider direction="vertical" />
       <el-tooltip
         effect="dark"
+        content="只读"
+        placement="bottom"
+      >
+        <EjIcon icon="lock" @click="setEditable(2)"
+        />
+      </el-tooltip>
+      <el-tooltip
+        effect="dark"
+        content="可编辑"
+        placement="bottom"
+      >
+        <EjIcon icon="unlock" @click="setEditable(1)"/>
+      </el-tooltip>
+      <el-tooltip
+        effect="dark"
         content="缩放"
         placement="bottom"
       >
@@ -214,9 +226,6 @@ const scaleVal = ref('100%')
       <div class="el-dropdown-link flex items-center">
         <el-avatar :size="30" :src="avatar" />
         <span class="ml-2">lszgf</span>
-        <el-icon class="el-icon--right">
-          <arrow-down />
-        </el-icon>
       </div>
       <template #dropdown>
         <el-dropdown-menu>
