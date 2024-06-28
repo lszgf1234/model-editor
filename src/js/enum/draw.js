@@ -101,7 +101,7 @@ let colorType  = [
   {
     key: 'text',
     value: 'color',
-    name: '文本颜色',
+    name: '文本颜色-备注',
   },
   {
     key: 'bg',
