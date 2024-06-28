@@ -312,6 +312,7 @@ export function exportData() {
     graphics: JSON.stringify(drawState.drawData),
   }
 
+  console.log('-entityInfos--', JSON.stringify(drawState.drawData.nodeDataArray))
   saveJson(data)
 
 }
